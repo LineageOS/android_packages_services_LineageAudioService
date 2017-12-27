@@ -28,10 +28,10 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-import cyanogenmod.media.AudioSessionInfo;
-import cyanogenmod.media.CMAudioManager;
-import cyanogenmod.media.ICMAudioService;
-import cyanogenmod.platform.Manifest;
+import lineageos.media.AudioSessionInfo;
+import lineageos.media.LineageAudioManager;
+import lineageos.media.ILineageAudioService;
+import lineageos.platform.Manifest;
 
 public class CMAudioService extends Service {
 
@@ -75,7 +75,7 @@ public class CMAudioService extends Service {
         super.onDestroy();
     }
 
-    private final IBinder mBinder = new ICMAudioService.Stub() {
+    private final IBinder mBinder = new ILineageAudioService.Stub() {
 
         @Override
         public List<AudioSessionInfo> listAudioSessions(int streamType) throws RemoteException {
@@ -92,9 +92,9 @@ public class CMAudioService extends Service {
     };
 
     private void broadcastSessionChanged(boolean added, AudioSessionInfo sessionInfo) {
-        Intent i = new Intent(CMAudioManager.ACTION_AUDIO_SESSIONS_CHANGED);
-        i.putExtra(CMAudioManager.EXTRA_SESSION_INFO, sessionInfo);
-        i.putExtra(CMAudioManager.EXTRA_SESSION_ADDED, added);
+        Intent i = new Intent(LineageAudioManager.ACTION_AUDIO_SESSIONS_CHANGED);
+        i.putExtra(LineageAudioManager.EXTRA_SESSION_INFO, sessionInfo);
+        i.putExtra(LineageAudioManager.EXTRA_SESSION_ADDED, added);
 
         sendBroadcastToAll(i, Manifest.permission.OBSERVE_AUDIO_SESSIONS);
     }
