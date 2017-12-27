@@ -17,7 +17,7 @@ LOCAL_PATH:= $(call my-dir)
 include $(CLEAR_VARS)
 
 LOCAL_SRC_FILES := \
-    src/org_cyanogenmod_cmaudio_service_CMAudioService.cpp
+    src/org_lineageos_lineageaudio_service_LineageAudioService.cpp
 
 LOCAL_C_INCLUDES := \
     $(JNI_H_INCLUDE) \
@@ -35,7 +35,7 @@ LOCAL_SHARED_LIBRARIES := \
     libmedia \
     libutils
 
-LOCAL_MODULE := libcmaudio_jni
+LOCAL_MODULE := liblineageaudio_jni
 
 LOCAL_CPPFLAGS += $(JNI_CFLAGS)
 LOCAL_LDLIBS := -llog

@@ -15,11 +15,11 @@
 LOCAL_PATH:= $(call my-dir)
 
 #
-# CM Audio Service
+# Lineage Audio Service
 #
 include $(CLEAR_VARS)
 
-LOCAL_PACKAGE_NAME := CMAudioService
+LOCAL_PACKAGE_NAME := LineageAudioService
 
 LOCAL_STATIC_JAVA_LIBRARIES := org.lineageos.platform.internal
 
@@ -29,7 +29,7 @@ LOCAL_RESOURCE_DIR := $(LOCAL_PATH)/res
 
 LOCAL_PROGUARD_ENABLED := disabled
 
-LOCAL_JNI_SHARED_LIBRARIES := libcmaudio_jni
+LOCAL_JNI_SHARED_LIBRARIES := liblineageaudio_jni
 
 LOCAL_PRIVILEGED_MODULE := true
 

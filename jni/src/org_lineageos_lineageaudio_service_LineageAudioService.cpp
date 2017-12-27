@@ -17,7 +17,7 @@
 
 //#define LOG_NDEBUG 0
 
-#define LOG_TAG "CMAudioService-JNI"
+#define LOG_TAG "LineageAudioService-JNI"
 
 #include <utils/Log.h>
 
@@ -58,7 +58,7 @@ static Mutex gCallbackLock;
 // ----------------------------------------------------------------------------
 
 static void
-org_cyanogenmod_cmaudio_service_CMAudioService_session_info_callback(int event,
+org_lineageos_lineageaudio_service_LineageAudioService_session_info_callback(int event,
         sp<AudioSessionInfo>& info, bool added)
 {
     AutoMutex _l(gCallbackLock);
@@ -81,7 +81,7 @@ org_cyanogenmod_cmaudio_service_CMAudioService_session_info_callback(int event,
 }
 
 JNIEXPORT void JNICALL
-org_cyanogenmod_cmaudio_service_registerAudioSessionCallback(JNIEnv *env, jobject thiz,
+org_lineageos_lineageaudio_service_registerAudioSessionCallback(JNIEnv *env, jobject thiz,
         jboolean enabled)
 {
     ALOGV("registerAudioSessionCallback %d", enabled);
@@ -99,10 +99,10 @@ org_cyanogenmod_cmaudio_service_registerAudioSessionCallback(JNIEnv *env, jobjec
     }
 
     AudioSystem::setAudioSessionCallback(enabled ?
-            org_cyanogenmod_cmaudio_service_CMAudioService_session_info_callback : NULL);
+            org_lineageos_lineageaudio_service_LineageAudioService_session_info_callback : NULL);
 }
 
-JNIEXPORT jint JNICALL org_cyanogenmod_cmaudio_service_CMAudioService_listAudioSessions(JNIEnv *env,
+JNIEXPORT jint JNICALL org_lineageos_lineageaudio_service_LineageAudioService_listAudioSessions(JNIEnv *env,
         jobject thiz, jint streams, jobject jSessions)
 {
     ALOGV("listAudioSessions");
@@ -154,13 +154,13 @@ exit:
 
 // ----------------------------------------------------------------------------
 
-static const char* const kClassPathName = "org/cyanogenmod/cmaudio/service/CMAudioService";
+static const char* const kClassPathName = "org/lineageos/lineageaudio/service/LineageAudioService";
 
 static JNINativeMethod gMethods[] = {
      {"native_listAudioSessions", "(ILjava/util/ArrayList;)I",
-            (void *)android::org_cyanogenmod_cmaudio_service_CMAudioService_listAudioSessions},
+            (void *)android::org_lineageos_lineageaudio_service_LineageAudioService_listAudioSessions},
      {"native_registerAudioSessionCallback", "(Z)V",
-            (void *)android::org_cyanogenmod_cmaudio_service_registerAudioSessionCallback},
+            (void *)android::org_lineageos_lineageaudio_service_registerAudioSessionCallback},
 };
 
 static int registerNativeMethods(JNIEnv* env, const char* className,
@@ -195,7 +195,7 @@ jint JNI_OnLoad(JavaVM* vm, void* reserved)
     }
 
     if (!registerNativeMethods(env, kClassPathName, gMethods, NELEM(gMethods))) {
-        ALOGE("Error: could not register native methods cmaudio service");
+        ALOGE("Error: could not register native methods lineageaudio service");
         return -1;
     }
 
@@ -207,14 +207,14 @@ jint JNI_OnLoad(JavaVM* vm, void* reserved)
             "toArray", "()[Ljava/lang/Object;");
 
     jclass audioSessionInfoClass = android::FindClassOrDie(env,
-            "cyanogenmod/media/AudioSessionInfo");
+            "lineageos/media/AudioSessionInfo");
     android::gAudioSessionInfoClass = android::MakeGlobalRefOrDie(env, audioSessionInfoClass);
     android::gAudioSessionInfoCstor = android::GetMethodIDOrDie(env, audioSessionInfoClass,
             "<init>", "(IIIII)V");
 
     android::gAudioSessionEventHandlerMethods.postAudioSessionEventFromNative =
             android::GetMethodIDOrDie(env, env->FindClass(kClassPathName),
-            "audioSessionCallbackFromNative", "(ILcyanogenmod/media/AudioSessionInfo;Z)V");
+            "audioSessionCallbackFromNative", "(ILlineageos/media/AudioSessionInfo;Z)V");
 
     ALOGV("loaded successfully!!!");
 

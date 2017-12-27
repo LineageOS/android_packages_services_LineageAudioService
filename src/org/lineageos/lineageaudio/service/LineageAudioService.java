@@ -13,8 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.cyanogenmod.cmaudio.service;
-
+package org.lineageos.lineageaudio.service;
 
 import android.app.Service;
 import android.content.Intent;
@@ -33,13 +32,13 @@ import lineageos.media.LineageAudioManager;
 import lineageos.media.ILineageAudioService;
 import lineageos.platform.Manifest;
 
-public class CMAudioService extends Service {
+public class LineageAudioService extends Service {
 
-    private static final String TAG = "CMAudioService";
+    private static final String TAG = "LineageAudioService";
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
     static {
-        System.loadLibrary("cmaudio_jni");
+        System.loadLibrary("lineageaudio_jni");
         if (DEBUG) Log.d(TAG, "loaded jni lib");
     }
 
