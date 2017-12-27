@@ -26,6 +26,7 @@ LOCAL_C_INCLUDES := \
     $(TOP)/hardware/libhardware/include
 
 LOCAL_SHARED_LIBRARIES := \
+    libaudioclient \
     liblog \
     libandroid_runtime \
     libnativehelper \
