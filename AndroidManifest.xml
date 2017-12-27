@@ -18,7 +18,7 @@
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           android:versionCode="1"
-          package="org.cyanogenmod.cmaudio.service">
+          package="org.lineageos.lineageaudio.service">
 
     <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS" />
 
@@ -26,16 +26,16 @@
     <uses-permission android:name="lineageos.permission.MANAGE_AUDIO_SESSIONS" />
 
     <application android:label="@string/app_name"
-                 android:icon="@mipmap/ic_cm_audio_service"
+                 android:icon="@mipmap/ic_lineage_audio_service"
                  android:defaultToDeviceProtectedStorage="true"
                  android:directBootAware="true">
 
-        <service android:name="org.cyanogenmod.cmaudio.service.CMAudioService"
+        <service android:name="org.lineageos.lineageaudio.service.LineageAudioService"
                  android:permission="lineageos.permission.BIND_CORE_SERVICE"
                  android:enabled="true"
                  android:exported="true">
             <intent-filter>
-                <action android:name="cyanogenmod.app.AudioManagerService"/>
+                <action android:name="lineageos.app.AudioManagerService"/>
             </intent-filter>
         </service>
 
